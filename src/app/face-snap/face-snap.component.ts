@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { FaceSnap } from '../models/face-snap-model';
-import { FaceSnapsService } from '../services/face-snaps.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -12,10 +11,7 @@ export class FaceSnapComponent {
   @Input() faceSnap!: FaceSnap;
   buttonText!: string;
 
-  constructor(
-    private faceSnapsService: FaceSnapsService,
-    private router: Router
-  ) {}
+  constructor(private router: Router) {}
 
   OnViewFaceSnap() {
     this.router.navigateByUrl(`facesnaps/${this.faceSnap.id}`);
