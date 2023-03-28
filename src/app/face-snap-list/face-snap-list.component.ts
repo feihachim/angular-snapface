@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FaceSnapsService } from '../services/face-snaps.service';
 import { FaceSnap } from '../models/face-snap-model';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-face-snap-list',
@@ -9,17 +9,14 @@ import { Subject } from 'rxjs';
   styleUrls: ['./face-snap-list.component.scss'],
 })
 export class FaceSnapListComponent implements OnInit, OnDestroy {
-  faceSnaps!: FaceSnap[];
-  private destroy$!: Subject<boolean>;
+  faceSnaps$!: Observable<FaceSnap[]>;
+  //faceSnaps!: FaceSnap[];
 
   constructor(private faceSnapsService: FaceSnapsService) {}
 
   ngOnInit(): void {
-    this.destroy$ = new Subject<boolean>();
-    this.faceSnaps = this.faceSnapsService.getAllFaceSnaps();
+    this.faceSnaps$ = this.faceSnapsService.getAllFaceSnaps();
   }
 
-  ngOnDestroy(): void {
-    this.destroy$.next(true);
-  }
+  ngOnDestroy(): void {}
 }
