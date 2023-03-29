@@ -1,6 +1,6 @@
+import { FaceSnapsRoutingModule } from './face-snaps-routing.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FaceSnapComponent } from './components/face-snap/face-snap.component';
 import { FaceSnapListComponent } from './components/face-snap-list/face-snap-list.component';
@@ -14,7 +14,7 @@ import { SingleFaceSnapComponent } from './components/single-face-snap/single-fa
     NewFaceSnapComponent,
     SingleFaceSnapComponent,
   ],
-  imports: [CommonModule, RouterModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FaceSnapsRoutingModule],
   exports: [
     FaceSnapComponent,
     FaceSnapListComponent,

@@ -1,4 +1,3 @@
-import { FaceSnapsModule } from './face-snaps/face-snaps.module';
 import { CoreModule } from './core/core.module';
 import { LandingPageModule } from './landing-page/landing-page.module';
 import { NgModule } from '@angular/core';
@@ -8,13 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    CoreModule,
-    FaceSnapsModule,
-    LandingPageModule,
-  ],
+  imports: [BrowserModule, AppRoutingModule, CoreModule, LandingPageModule],
   providers: [],
   bootstrap: [AppComponent],
 })
