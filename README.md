@@ -25,3 +25,57 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Old way to use angular guard
+
+```{.ts}
+import { Injectable } from '@angular/core';
+import {
+  ActivatedRouteSnapshot,
+  CanActivate,
+  Router,
+  RouterStateSnapshot,
+} from '@angular/router';
+import { AuthService } from '../services/auth.service';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class AuthGuard implements CanActivate {
+  constructor(private auth: AuthService, private router: Router) {}
+
+  canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): boolean {
+    const token = this.auth.getToken();
+    if (token) {
+      return true;
+    } else {
+      this.router.navigateByUrl('/auth/login');
+      return false;
+    }
+  }
+}
+
+```
+
+## New way to use angular guard
+
+```{.ts}
+import { inject } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
+
+export const authGuard = () => {
+  const auth = inject(AuthService);
+  const router = inject(Router);
+  const token = auth.getToken();
+  if (token) {
+    return true;
+  } else {
+    router.navigateByUrl('/auth/login');
+    return false;
+  }
+};
+```
