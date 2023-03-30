@@ -1,4 +1,6 @@
-import { Injectable } from '@angular/core';
+// Implementing Auth Guard the old way in comment
+
+/*import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
   CanActivate,
@@ -25,4 +27,22 @@ export class AuthGuard implements CanActivate {
       return false;
     }
   }
-}
+}*/
+
+// Implementing Auth Gaurd as a function since class implementation is deprecated as of Angular 15
+
+import { inject } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
+
+export const authGuard = () => {
+  const auth = inject(AuthService);
+  const router = inject(Router);
+  const token = auth.getToken();
+  if (token) {
+    return true;
+  } else {
+    router.navigateByUrl('/auth/login');
+    return false;
+  }
+};
